@@ -1,6 +1,6 @@
 ## Finite CAM for calcium imaging data
 
-Finite version of the Common Atom Model of Denti et al. (2020) based on the mixtures of finite mixtures of Frühwirth-Schnatter, Malsiner-Walli e Grün (2020).\\
+Finite version of the Common Atom Model of Denti et al. (2020) based on the mixtures of finite mixtures of Frühwirth-Schnatter, Malsiner-Walli e Grün (2020).
 
 Application to calcium imaging data for the detection of neurons' spiking activity.
 
