@@ -4,7 +4,7 @@ library(RcppDist)
 library(ggplot2)
 library(viridis)
 
-sourceCpp('./fCAM_calcium_imaging.cpp')
+sourceCpp('../fCAM_calcium_imaging.cpp')
 
  
 data <- read.csv("cell_data.csv", header = FALSE)
@@ -19,18 +19,27 @@ load(file = "group.Rdata")
 #---------------------------------------------------------#
 
 library(FastLZeroSpikeInference)
-fit <- FastLZeroSpikeInference::estimate_spikes(dat = y_real, gam = 0.35, lambda = 0.004)
+fit <- FastLZeroSpikeInference::estimate_spikes(dat = y_real, gam = 0.5, lambda = 0.004)
 clus = kmeans(y_real[fit$spikes], centers = 5)
+clusterO_start = rep(0, length(y_real))
+clusterO_start[fit$spikes] = clus$cluster
 
-nrep = 8500
+A_start = rep(0, 100)
+A_start[2:6] = c(clus$centers)
+
+# WARNING!
+# running the MCMC for all 10000 iterations may lead to memory error and crash of the system
+# we recommend running it for fewer iterations (~1000) or on a small portion of the data
+#
+nrep = 10000
 start <- Sys.time()
 run = calcium_gibbs(Nrep = nrep,
                     y = y_real,
                     g = g,
                     cal = c(0,y_real),
-                    clO = clus$cluster,
+                    clO = clusterO_start,
                     clD = 1:4,
-                    A_start = clus$centers,
+                    A_start = A_start,
                     b_start = 0,
                     gamma_start = 0.6,
                     sigma2_start = 0.001,
@@ -41,7 +50,7 @@ run = calcium_gibbs(Nrep = nrep,
                     maxK_start = 5,
                     maxL_start = 10,
                     c0 = 0, varC0 = 0.1,
-                    hyp_A1 = 5, hyp_A2 = 7,
+                    hyp_A1 = 8, hyp_A2 = 8,
                     hyp_b1 = 0, hyp_b2 = 1,
                     hyp_sigma21 = 1000, hyp_sigma22 = 1,
                     hyp_tau21 = 1000, hyp_tau22 = 1,
@@ -74,6 +83,23 @@ run$maxK = run$maxK[-burnin]
 run$maxL = run$maxL[-burnin]
 
 run$calcium = NULL
+run$pi_k_out = NULL
+
+# thinning
+burnin = seq(1, 3000, by = 2)
+run$calcium = run$calcium[,-burnin]
+run$clusterO = run$clusterO[,-burnin]
+run$clusterD = run$clusterD[,-burnin]
+run$b = run$b[-burnin]
+run$gamma = run$gamma[-burnin]
+run$sigma2 = run$sigma2[-burnin]
+run$tau2 = run$tau2[-burnin]
+run$A = run$A[,-burnin]
+run$p = run$p[-burnin]
+run$alpha = run$alpha[-burnin]
+run$beta = run$beta[-burnin]
+run$maxK = run$maxK[-burnin]
+run$maxL = run$maxL[-burnin]
 
 #---------------------------------------------------------#
 # check convergence
@@ -125,15 +151,11 @@ length(times)
 
 df = data.frame(x = 1:n, y = y_real, g = g)
 
-which(diff(g)!=0)
-
 df_rect = data.frame(start = c(745, 16101, 39581, 54932, 70294, 80227, 97383),
                      end = c(15198, 30550, 54029, 69391, 79323, 96104, 113637),
                      Stimulus = as.factor(c("Static grating","Natural scene","Natural scene",
                                             "Static grating","Natural movie","Natural scene",
                                             "Static grating")) )
-
-
 cols = c("#91ff00", "#00fffb","#ff3700")
 
 df$x = df$x/30
