@@ -4,7 +4,7 @@
 library(Rcpp)
 library(parallel)
 library(RcppArmadillo)
-sourceCpp('fCAM_calcium_imaging.cpp')
+sourceCpp('../fCAM_calcium_imaging.cpp')
 
 load("data_scen1_seed1.Rdata") # this is an example for seed=1
 # load the simulated data
@@ -88,13 +88,6 @@ lines(1:length(run$maxL), cumsum(run$maxL)/1:length(run$maxL), col =2)
 plot(1:length(run$maxK), run$maxK, type = "l", ylab = "maxK")
 lines(1:length(run$maxK), cumsum(run$maxK)/1:length(run$maxL), col =2)
 
-# cluster parameters: label switching
-plot(1:length(run$A[2, ]), run$A[2, ], type = "l", ylab = "A")
-plot(1:length(run$A[3, ]), run$A[3, ], type = "l", ylab = "A")
-plot(1:length(run$A[4, ]), run$A[4, ], type = "l", ylab = "A")
-plot(1:length(run$A[5, ]), run$A[5, ], type = "l", ylab = "A")
-plot(1:length(run$A[5, ]), run$A[6, ], type = "l", ylab = "A")
-
 
 # just to free some memory
 run$calcium = NULL
@@ -107,10 +100,11 @@ run$tau2 = mean(run$tau2[-burnin,])
 A_ext = t(sapply(1:ncol(run$clusterO[,-burnin]), function(x) run$A[,-burnin][run$clusterO[,x]+1,x]) )
 
 est_spikes = colMeans(A_ext) 
-est_spikes[which( apply(A_ext, 2, function(x) sum(x>0)) < (nrow(A_ext)/2) )] = 0
+est_spikes[which( apply(A_ext, 2, function(x) sum(x>0)) < (nrow(A_ext)/2) )] = 0 # I keep only the spikes which are present in at least half the iterations
 times = which(est_spikes>0)
+length(times) # number of detected spikes
 
-# analysis of the clusters
+# analysis of the clusters: compute Rand index to evaluate the accuracy of the clustering
 library(mclust)
 AA_cluster = apply(A_ext, 1, rank )
 rm(A_ext)
@@ -122,4 +116,4 @@ summary(rand_indexD)
 false_negatives = sum(sapply(spp, function(x) !(x %in% times)))  # total number of false negatives
 false_positives = sum(sapply(times, function(x) !(x %in% spp)))  # total number of false positives
 
-
+(false_positives + false_negatives) / length(y) # misclassification error rate
