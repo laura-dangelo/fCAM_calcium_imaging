@@ -12,6 +12,8 @@ The repository contains:
 - **Allen_Brain_data_analysis/** : folder containing the R script to run the analysis on a real series of calcium imaging data. The folder also contains a csv file (cell_data.csv) of a trace for a neuron, extracted from the Allen brain observatory database. The file group.Rdata contains the information about the times of the visual stimuli for the considered neuron.
 
 #### References
+- L. D'Angelo, A. Canale, Z. Yu and M. Guindani (2021). Bayesian nonparametric analysis for the detection of spikes in noisy calcium imaging data. *arXiv preprint arXiv:2102.09403*
+
 - Allen Institute for Brain Science (2016). Allen brain observatory.  http://observatory.brain-map.org/visualcoding
 
 - F. Denti, F. Camerlenghi, M. Guindani and A. Mira (2020). A Common Atom Model for the Bayesian Nonparametric Analysis of Nested Data. *arXiv preprint arXiv:2008.07077*
