@@ -13,9 +13,12 @@ The repository contains:
 
 #### References
 - L. D'Angelo, A. Canale, Z. Yu and M. Guindani (2021). Bayesian nonparametric analysis for the detection of spikes in noisy calcium imaging data. *arXiv preprint arXiv:2102.09403*
+  
+- Allen Institute MindScope Program (2016). Allen Brain Observatory – 2-photon visual coding
+[dataset]. brain-map.org/explore/circuits http://observatory.brain-map.org/visualcoding .
 
-- Allen Institute for Brain Science (2016). Allen brain observatory.  http://observatory.brain-map.org/visualcoding
+- de Vries, S., Lecoq, J., Buice, M., Groblewski, P., Ocker, G., Oliver, M. et al. (2020). A large-scale standardized physiological survey reveals functional organization of the mouse visual cortex. *Nature neuroscience* **23**, 138–151.
 
-- F. Denti, F. Camerlenghi, M. Guindani and A. Mira (2020). A Common Atom Model for the Bayesian Nonparametric Analysis of Nested Data. *arXiv preprint arXiv:2008.07077*
+- Denti, F., Camerlenghi, F., Guindani, M., and Mira, A. (2021). A common atoms model for the Bayesian nonparametric analysis of nested data. *Journal of the American Statistical Association*.
 
-- S. Frühwirth-Schnatter, G. Malsiner-Walli and B. Grün (2020). Generalized mixtures of finite mixtures and telescoping sampling. *arXiv preprint arXiv:2005.09918*
+- Frühwirth-Schnatter, S., Malsiner-Walli, G., and Grün, B. (2021). Generalized mixtures of finite mixtures and telescoping sampling. *Bayesian Analysis* **16**, 1279 – 1307.
