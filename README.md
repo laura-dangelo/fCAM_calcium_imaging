@@ -15,7 +15,7 @@ The repository contains:
 - L. D'Angelo, A. Canale, Z. Yu and M. Guindani (2021). Bayesian nonparametric analysis for the detection of spikes in noisy calcium imaging data. *arXiv preprint arXiv:2102.09403*
   
 - Allen Institute MindScope Program (2016). Allen Brain Observatory – 2-photon visual coding
-[dataset]. brain-map.org/explore/circuits http://observatory.brain-map.org/visualcoding .
+[dataset]. brain-map.org/explore/circuits observatory.brain-map.org/visualcoding .
 
 - de Vries, S., Lecoq, J., Buice, M., Groblewski, P., Ocker, G., Oliver, M. et al. (2020). A large-scale standardized physiological survey reveals functional organization of the mouse visual cortex. *Nature neuroscience* **23**, 138–151.
 
