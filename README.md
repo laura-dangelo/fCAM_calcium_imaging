@@ -12,7 +12,7 @@ The repository contains:
 - **Allen_Brain_data_analysis/** : folder containing the R script to run the analysis on a real series of calcium imaging data. The folder also contains a csv file (cell_data.csv) of a trace for a neuron, extracted from the Allen brain observatory database. The file group.Rdata contains the information about the times of the visual stimuli for the considered neuron.
 
 #### References
-- L. D'Angelo, A. Canale, Z. Yu and M. Guindani (2021). Bayesian nonparametric analysis for the detection of spikes in noisy calcium imaging data. *Biometrics* doi.org/10.1111/biom.13626
+- L. D'Angelo, A. Canale, Z. Yu and M. Guindani (2022). Bayesian nonparametric analysis for the detection of spikes in noisy calcium imaging data. *Biometrics*. doi = 10.1111/biom.13626
   
 - Allen Institute MindScope Program (2016). Allen Brain Observatory – 2-photon visual coding
 [dataset]. brain-map.org/explore/circuits observatory.brain-map.org/visualcoding .
